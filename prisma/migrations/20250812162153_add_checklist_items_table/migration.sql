@@ -35,7 +35,7 @@ SELECT
     gen_random_uuid()::text as "id",
     COALESCE(item->>'text', item->>'content', '') as "content",
     COALESCE((item->>'checked')::boolean, (item->>'done')::boolean, false) as "checked",
-    COALESCE((item->>'order')::integer, row_number() OVER (PARTITION BY n.id ORDER BY (item->>'order')::integer, row_number() OVER ())) as "order",
+    COALESCE((item->>'order')::integer, 0) as "order",
     n.id as "noteId",
     n."createdAt",
     n."updatedAt"
