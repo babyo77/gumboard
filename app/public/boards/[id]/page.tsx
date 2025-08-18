@@ -66,7 +66,9 @@ export default function PublicBoardPage({ params }: { params: Promise<{ id: stri
       }
       if (boardResponse.ok) {
         const { board } = await boardResponse.json();
-        setBoard(board);
+        if (board.isPublic) {
+          setBoard(board);
+        }
       }
 
       const notesResponse = await fetch(`/api/boards/${boardId}/notes`);
